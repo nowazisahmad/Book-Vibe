@@ -72,7 +72,7 @@ return (
           </ul>
         </div>
         <div className="flex gap-2 items-center">
-          <Image className="h-[40px] w-[40px]" src={logo} alt="Logo image" />
+          <Image className="h-10 w-10" src={logo} alt="Logo image" />
           <Link href="/" className="text-xl font-bold">Book Vibe</Link>
         </div>
         

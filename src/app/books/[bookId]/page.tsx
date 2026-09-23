@@ -1,34 +1,31 @@
 import ReadButton from "@/components/bookDetails/ReadButton";
 import WishlistButton from "@/components/bookDetails/WishlistButton";
-import IBook from "@/type";
 import Image from "next/image";
+import { notFound } from "next/navigation";
+import booksData from "@/data/booksData.json";
 
 interface IBookDetailsPageProps {
   params: Promise<{
-    id: string;
+    bookId: string;
   }>;
 }
 
 const getBooks = async () => {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/booksData.json`,
-    );
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching books data:", error);
-    return [];
-  }
+  return booksData;
 };
 
 const BookDetailsPage = async ({ params }: IBookDetailsPageProps) => {
-  const { id } = await params;
+  const { bookId } = await params;
+
   const booksData = await getBooks();
-  //   const book = booksData.find((book: IBook) => book.bookId === Number(id));
+
   const book = booksData.find(
-    (book: IBook) => String(book.bookId) === String(id),
-  ) as IBook;
+    (book) => book.bookId === Number(bookId)
+  );
+
+  if (!book) {
+    notFound();
+  }
   return (
     <div className="container mx-auto px-4">
       <div className="card lg:card-side overflow-hidden bg-base-100 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">

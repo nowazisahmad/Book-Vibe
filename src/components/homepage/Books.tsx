@@ -1,17 +1,14 @@
 import IBook from "@/type";
 import BookCard from "../shared/BookCard";
+import booksData from "@/data/booksData.json";
 
-const getBooks = async():Promise<IBook[]> => {
-    const res = await fetch("http://localhost:3000/booksData.json")
-    const data = await res.json();
-    return data;
-}
+const Books = () => {
+  const books = booksData as IBook[];
 
-const Books = async () => {
-    const booksData = await getBooks();
-    console.log(booksData);
-    return (
-        <section className="container mx-auto my-[70px] px-4">
+  console.log(books);
+
+  return (
+        <section className="container mx-auto my-17 px-4">
       {/* Section Heading */}
       <div className="mb-10 text-center">
         <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-emerald-500">
